@@ -3,6 +3,8 @@ import time
 import pandas as pd
 
 
+
+
 def get_completion(prompt, model="gpt-4-1106-preview"):
     openai.api_key = "YOUR_API_KEY"
     messages = [{"role": "system", 
@@ -19,14 +21,15 @@ def get_completion(prompt, model="gpt-4-1106-preview"):
 
 def prediction(csv_path):
     predictions = []
-    df = pd.read_csv(csv_path)
-    timestamp_command_list = []
-    for timestamp, command in zip(df['timestamp'], df['commands']):
-        timestamp_command_list.append((timestamp, command))
+    #df = pd.read_csv(csv_path)
+    #timestamp_command_list = []
+    #for timestamp, command in zip(df['timestamp'], df['commands']):
+    #    timestamp_command_list.append((timestamp, command))
 
     prompt = f"""For the malicious SSH command below, what is the intent of adversaries on my system?
 
-    SSH Command: {timestamp_command_list}
+    SSH Command: mv /usr/bin/curl /usr/bin/cd1
+
 
     Please break down the command into its components and explain the intent of the adversary. Finally, provide the MITRE ATT&CK tactic(s) that the adversary will achieve with this technique.
     """
@@ -45,5 +48,6 @@ def prediction(csv_path):
 
 if __name__ == "__main__":
     predictions = prediction(csv_path='./Data/commands.csv')
-    df = pd.DataFrame(predictions)    
-    df.to_csv('./preds_gpt-4-turbo_prompt_only.csv', index=False)
+    df = pd.DataFrame(predictions)
+    print(df)
+    #df.to_csv('./preds_gpt-4-turbo_prompt_only.csv', index=False)
