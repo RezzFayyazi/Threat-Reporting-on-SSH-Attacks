@@ -1,0 +1,1 @@
+2023-12-12T11:54:26.588994Z [HoneyPotSSHTransport,0,10.0.2.2] CMD: mv /usr/bin/curl /usr/bin/cd1
